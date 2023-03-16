@@ -1,17 +1,14 @@
-# FeedScript
+# FeedScript Basics:
 A simple mathematical programming language
 
-
-The Basics of FeedScript:
-
-Variables:
+# Variables:
 To define a variable in FeedScript, you would use the var keyword followed by the variable name and an initial value (if desired):
 
 var x = 10;
 var y = 2.5;
 Note that in FeedScript, variables can hold either integer or floating-point values, but not both at the same time.
 
-Expressions:
+# Expressions:
 FeedScript supports basic arithmetic and logical expressions using the standard operators:
 
 var sum = x + y;
@@ -23,7 +20,7 @@ var greater_than = x > y;
 var less_than = x < y;
 var equal_to = x == y;
 
-Control Structures:
+# Control Structures:
 FeedScript provides if-else statements for conditional execution:
 
 if (x > y) {
@@ -39,7 +36,7 @@ while (x > 0) {
     x = x - 1;
 }
 
-Functions:
+# Functions:
 You can define your own functions in FeedScript using the function keyword:
 
 function square(x) {
@@ -49,7 +46,7 @@ function square(x) {
 var result = square(3);
 fs_println(result); // prints "9"
 
-Input and Output:
+# Input and Output:
 To print a string to the console, you can use the fs_print() or fs_println() functions from stdlib.h:
 
 fs_println("Hello, world!");
