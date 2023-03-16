@@ -1,15 +1,15 @@
-# Define the basic arithmetic operations
-def add(a, b) -> a + b
-def sub(a, b) -> a - b
-def mul(a, b) -> a * b
-def div(a, b) -> a / b
+# Prompt the user for input
+print("Enter a mathematical expression using +, -, *, and / operators:")
 
 # Read in the user's input
-print("Enter an expression: ")
 expr = input()
 
 # Parse and evaluate the expression
-result = eval(expr)
+try:
+    result = eval(expr)
+except ZeroDivisionError:
+    print("Error: Division by zero")
+    exit(1)
 
 # Print the result
-print("Result: ", result)
+print("Result:", result)

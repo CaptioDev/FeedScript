@@ -2,23 +2,24 @@
 #define LEXER_H
 
 typedef enum {
-    TOK_INT,
-    TOK_FLOAT,
-    TOK_IDENT,
-    TOK_PLUS,
-    TOK_MINUS,
-    TOK_STAR,
-    TOK_SLASH,
-    TOK_LPAREN,
-    TOK_RPAREN,
-    TOK_EOF
-} TokenType;
+    TOKEN_NUMBER,
+    TOKEN_OPERATOR,
+    TOKEN_IDENTIFIER
+} token_type_t;
 
-typedef struct {
-    TokenType type;
+typedef enum {
+    OPERATOR_ADD = '+',
+    OPERATOR_SUBTRACT = '-',
+    OPERATOR_MULTIPLY = '*',
+    OPERATOR_DIVIDE = '/'
+} operator_type_t;
+
+typedef struct token {
+    token_type_t type;
     char *value;
-} Token;
+    struct token *next;
+} token_t;
 
-Token *get_next_token(void);
+token_t *lex(const char *input);
 
 #endif

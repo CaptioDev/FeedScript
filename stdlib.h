@@ -1,13 +1,13 @@
-#ifndef STDLIB_H
-#define STDLIB_H
+#ifndef MATH_STDLIB_H
+#define MATH_STDLIB_H
 
 #include <stdio.h>
 #include <stdlib.h>
 
-void fs_exit(int status);
-void fs_print(char *str);
-void fs_println(char *str);
-int fs_read_int(void);
-float fs_read_float(void);
+void math_exit(int status);
+void math_print(const char *str);
+void math_println(const char *str);
+int math_read_int(void);
+float math_read_float(void);
 
 #endif
