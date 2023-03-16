@@ -1,59 +1,96 @@
-# FeedScript Basics:
-A simple mathematical programming language
+# FeedScript
+FeedScript is a programming language designed for numeric computation and data processing. It is a high-level language with a syntax similar to popular programming languages like C and Python, but with a focus on mathematical operations and functions.
 
-# Variables:
-To define a variable in FeedScript, you would use the var keyword followed by the variable name and an initial value (if desired):
+# Installation
+To use FeedScript, you will need to check the interpreter.c and .h files in this GitHub.
 
-var x = 10;
-var y = 2.5;
-Note that in FeedScript, variables can hold either integer or floating-point values, but not both at the same time.
+# Usage
+FeedScript files have the extension .fscript. To run a FeedScript program, you need to call the interpreter and pass the path to the file as an argument. Here's an example:
 
-# Expressions:
-FeedScript supports basic arithmetic and logical expressions using the standard operators:
+feedscript my_program.fscript
+Language Basics
+Data Types
+FeedScript supports two main data types: int for integers and float for floating-point numbers.
 
-var sum = x + y;
-var product = x * y;
-var quotient = x / y;
-var remainder = x % y;
+# Variables
+In FeedScript, you can declare variables using the let keyword, followed by the variable name and its value. Here's an example:
 
-var greater_than = x > y;
-var less_than = x < y;
-var equal_to = x == y;
+let x = 10;
+let y = 3.14;
 
-# Control Structures:
-FeedScript provides if-else statements for conditional execution:
+# Operators
+FeedScript supports a range of mathematical operators, including:
 
-if (x > y) {
-    fs_println("x is greater than y");
-} else {
-    fs_println("x is less than or equal to y");
++ addition
+- subtraction
+* multiplication
+/ division
+% modulo
+Here's an example:
+
+let x = 10;
+let y = 3;
+let z = x + y * 2;
+
+# Functions
+FeedScript supports user-defined functions. You can declare a function using the def keyword, followed by the function name, its parameters (if any), and its body. Here's an example:
+
+def multiply(x, y) {
+    return x * y;
+}
+You can call a function by its name, followed by its arguments in parentheses. Here's an example:
+
+let x = 10;
+let y = 3;
+let z = multiply(x, y);
+
+# Input and Output
+FeedScript provides functions for input and output. The print function outputs text to the console, while the read_int and read_float functions read input from the user. Here's an example:
+
+let x = read_int();
+let y = read_float();
+print("x = " + x + ", y = " + y);
+Examples
+Here are some examples of FeedScript programs:
+
+Example 1: Compute the sum of two numbers
+
+let x = 10;
+let y = 20;
+let z = x + y;
+print(z);
+
+Example 2: Compute the factorial of a number
+
+def factorial(n) {
+    if (n == 0) {
+        return 1;
+    } else {
+        return n * factorial(n - 1);
+    }
 }
 
-FeedScript also provides while loops for iterative execution:
+let x = read_int();
+let y = factorial(x);
+print(y);
 
-while (x > 0) {
-    fs_println(x);
-    x = x - 1;
+Example 3: Generate a Fibonacci sequence
+
+def fibonacci(n) {
+    if (n == 0) {
+        return 0;
+    } else if (n == 1) {
+        return 1;
+    } else {
+        return fibonacci(n - 1) + fibonacci(n - 2);
+    }
 }
 
-# Functions:
-You can define your own functions in FeedScript using the function keyword:
-
-function square(x) {
-    return x * x;
+let x = read_int();
+for (let i = 0; i < x; i++) {
+    let y = fibonacci(i);
+    print(y);
 }
 
-var result = square(3);
-fs_println(result); // prints "9"
-
-# Input and Output:
-To print a string to the console, you can use the fs_print() or fs_println() functions from stdlib.h:
-
-fs_println("Hello, world!");
-
-To read input from the console, you can use the fs_read_*() functions from stdlib.h:
-
-var x = fs_read_int();
-
-# Extra:
-Ignore the .cproject, and .project files. Those are for Eclipse IDE configurations. GitHub reads the .fs file as GLSL (OpenGL Shading Language), .fs means FeedScript (In this case). .Settings and .VsCode folders are for other programs. .Settings is Eclipse IDE and .VsCode is VScode
+# Conclusion
+FeedScript is a powerful language for mathematical computation and data processing. Its simple syntax and user-friendly functions make it easy to learn and use. Try it out for yourself and see what you can create!
