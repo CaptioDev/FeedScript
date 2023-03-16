@@ -56,4 +56,4 @@ To read input from the console, you can use the fs_read_*() functions from stdli
 var x = fs_read_int();
 
 # Extra:
-Ignore the .settings, .cproject, and .project files. Those are for Eclipse IDE configurations.
+Ignore the .settings, .cproject, and .project files. Those are for Eclipse IDE configurations. GitHub reads the .fs file as GLSL (OpenGL Shading Language), .fs means FeedScript (In this case).
