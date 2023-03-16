@@ -1,5 +1,5 @@
 # FeedScript
-FeedScript is a programming language designed for numeric computation and data processing. It is a high-level language with a syntax similar to popular programming languages like C and Python, but with a focus on mathematical operations and functions.
+FeedScript is a programming language designed for numeric computation and data processing. It is a high-level language with a syntax similar to popular programming languages like C and Python, but with a focus on mathematical operations and functions. FeedScript is inspired by C and designed to be easy to learn and use for beginners, but it is not the same as C. Although there are similarities between the two languages, such as syntax and some built-in functions, FeedScript has its own unique features and capabilities that set it apart from C. Some of these features include a simplified syntax, automatic memory management, and built-in support for common tasks like string manipulation and input/output. While FeedScript may share some similarities with C, it is a distinct programming language in its own right.
 
 # Installation
 To use FeedScript, you will need to check the interpreter.c and .h files in this GitHub.
