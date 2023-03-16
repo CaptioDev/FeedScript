@@ -5,7 +5,7 @@ FeedScript is a programming language designed for numeric computation and data p
 To use FeedScript, you will need to check the interpreter.c and .h files in this GitHub.
 
 # Usage
-FeedScript files have the extension .fscript. To run a FeedScript program, you need to call the interpreter and pass the path to the file as an argument. Here's an example:
+FeedScript files have the extension .fscript or .fs, .fs is a lot better and runs in the interpreter. To run a FeedScript program, you need to call the interpreter and pass the path to the file as an argument. Here's an example:
 
 feedscript my_program.fscript
 Language Basics
