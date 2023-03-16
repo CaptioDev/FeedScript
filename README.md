@@ -54,3 +54,6 @@ fs_println("Hello, world!");
 To read input from the console, you can use the fs_read_*() functions from stdlib.h:
 
 var x = fs_read_int();
+
+# Extra:
+Ignore the .settings, .cproject, and .project files. Those are for Eclipse IDE configurations.
