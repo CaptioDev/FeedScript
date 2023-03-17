@@ -4,6 +4,24 @@
 #include "parser.h"
 #include "symbol_table.h"
 
+// Define the symbol_table_t type
+struct symbol_table {
+    // PUT IN TABLE STRUCT FIELD WITH MATTHEW
+};
+
+// Define the ast_node_t type
+struct ast_node {
+    // PUT IN TABLE STRUCT FIELD WITH MATTHEW
+};
+
+// interpreter.h
+typedef struct token {
+    char* value;
+    int type;
+} token_t;
+
+token_t* tokenize(char* input);
+
 typedef struct {
     symbol_table_t *symbol_table;
 } interpreter_t;

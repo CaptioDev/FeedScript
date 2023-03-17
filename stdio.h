@@ -4,6 +4,10 @@
 #include <stdio.h>
 #include "math_types.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Function to print a complex number
 void math_fprintf_complex(FILE *stream, const char *format, complex_t c);
 
@@ -22,4 +26,8 @@ void math_fprintf_matrix(FILE *stream, const char *format, matrix_t m);
 // Function to read a matrix
 void math_scanf_matrix(const char *format, matrix_t *m);
 
+#ifdef __cplusplus
+}
 #endif
+
+#endif /* MATH_STDIO_H */

@@ -29,7 +29,7 @@ int main(int argc, char **argv) {
 
     token_t *tokens = tokenize(input);
     expression_t *expr = parse(tokens);
-    value_t result = interpret(expr);
+    value_t result = interpret_expression(expr);
 
     printf("%f\n", result);
 

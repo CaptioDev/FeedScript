@@ -23,7 +23,7 @@ static void tokenize_operator(token_t **tokens, const char *buffer, size_t *pos)
         case '*': add_operator_token(tokens, OPERATOR_MULTIPLY); break;
         case '/': add_operator_token(tokens, OPERATOR_DIVIDE); break;
         default: 
-            printf("Unknown operator\n"); 
+            fprintf(stderr, "Unknown operator: %c\n", buffer[(*pos)-1]); 
             exit(1);
     }
 }
@@ -66,7 +66,7 @@ token_t *lex(const char *input) {
         }
         // Unknown character encountered.
         else {
-            printf("Unknown character: %c\n", buffer[buffer_pos]);
+            fprintf(stderr, "Unknown character: %c\n", buffer[buffer_pos]);
             exit(1);
         }
     }

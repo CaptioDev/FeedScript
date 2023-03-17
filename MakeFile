@@ -9,25 +9,28 @@ YACC = bison
 all: feedscript
 
 feedscript: main.o lexer.o parser.o evaluator.o
-	$(CC) $(LDFLAGS) -o $@ $^
+$(CC) $(LDFLAGS) -o $@ $^
 
 main.o: main.c parser.h evaluator.h
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(CC) $(CFLAGS) -c -o $@ $<
 
-lexer.o: lexer.c parser.h
-	$(CC) $(CFLAGS) -c -o $@ $<
+lexer.o: lexer.c lexer.h parser.h
+$(CC) $(CFLAGS) -c -o $@ $<
 
 parser.o: parser.c parser.h
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(CC) $(CFLAGS) -c -o $@ $<
 
 evaluator.o: evaluator.c evaluator.h parser.h
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(CC) $(CFLAGS) -c -o $@ $<
 
-lexer.c: lexer.l
-	$(LEX) -o $@ $<
+lexer.c: lexer.l lexer.h
+$(LEX) -o $@ $<
 
-parser.c parser.h: parser.y
-	$(YACC) -d -o parser.c $<
+parser.c parser.h: parser.y lexer.h
+$(YACC) -d -o parser.c $<
 
 clean:
-	rm -f feedscript *.o lexer.c parser.c parser.h
+rm -f feedscript *.o lexer.c parser.c parser.h
+
+
+

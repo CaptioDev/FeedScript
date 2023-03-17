@@ -10,4 +10,4 @@ void math_println(const char *str);
 int math_read_int(void);
 float math_read_float(void);
 
-#endif
+#endif /* MATH_STDLIB_H */

@@ -3,6 +3,62 @@
 #include <string.h>
 #include "evaluator.h"
 
+// Creates a new environment with no parent environment.
+environment_t* create_environment() {
+    environment_t *env = (environment_t*) malloc(sizeof(environment_t));
+    env->parent = NULL;
+    env->num_symbols = 0;
+    return env;
+}
+
+// Looks up a symbol in the environment and its parent environments.
+symbol_t* lookup_symbol(environment_t *env, const char *identifier) {
+    while (env != NULL) {
+        for (int i = 0; i < env->num_symbols; i++) {
+            if (strcmp(env->symbols[i].identifier, identifier) == 0) {
+                return &env->symbols[i];
+            }
+        }
+        env = env->parent;
+    }
+    return NULL;
+}
+
+// Adds a symbol to the environment.
+void add_symbol(environment_t *env, const char *identifier, double value) {
+    if (env->num_symbols == MAX_SYMBOLS) {
+        printf("Error: too many symbols\n");
+        exit(1);
+    }
+    symbol_t *symbol = &env->symbols[env->num_symbols++];
+    symbol->type = SYMBOL_VARIABLE;
+    symbol->identifier = (char*) malloc(sizeof(char) * (strlen(identifier) + 1));
+    strcpy(symbol->identifier, identifier);
+    symbol->value = value;
+}
+
+// Adds a function symbol to the environment.
+void add_function(environment_t *env, const char *identifier, int arity, double (*func)(double*)) {
+    if (env->num_symbols == MAX_SYMBOLS) {
+        printf("Error: too many symbols\n");
+        exit(1);
+    }
+    symbol_t *symbol = &env->symbols[env->num_symbols++];
+    symbol->type = SYMBOL_FUNCTION;
+    symbol->identifier = (char*) malloc(sizeof(char) * (strlen(identifier) + 1));
+    strcpy(symbol->identifier, identifier);
+    symbol->arity = arity;
+    symbol->func = func;
+}
+
+// Deletes an environment and all its symbols.
+void delete_environment(environment_t *env) {
+    for (int i = 0; i < env->num_symbols; i++) {
+        free(env->symbols[i].identifier);
+    }
+    free(env);
+}
+
 // Evaluates a number expression.
 double evaluate_number(expression_t *expr, environment_t *env) {
     return expr->value;
@@ -41,61 +97,52 @@ double evaluate_operator(expression_t *expr, environment_t *env) {
     }
 }
 
-// Evaluates a function call expression.
-double evaluate_function_call(expression_t *expr, environment_t *env) {
-    // Look up the function symbol in the environment
-    symbol_t *symbol = lookup_symbol(env, expr->identifier);
-    if (!symbol) {
-        printf("Undefined function: %s\n", expr->identifier);
-        exit(1);
-    }
-    
-    // Check that the symbol is a function
-    if (symbol->type != SYMBOL_FUNCTION) {
-        printf("%s is not a function\n", expr->identifier);
-        exit(1);
-    }
-    
-    // Check that the number of arguments is correct
-    if (symbol->arity != expr->num_args) {
-        printf("Wrong number of arguments to function %s (expected %d, got %d)\n",
-               expr->identifier, symbol->arity, expr->num_args);
-        exit(1);
-    }
-    
-    // Evaluate the arguments
-    double *arg_values = (double*) malloc(sizeof(double) * expr->num_args);
-    for (int i = 0; i < expr->num_args; i++) {
-        arg_values[i] = evaluate_expression(expr->args[i], env);
-    }
-    
-    // Call the function with the argument values
-    double result = symbol->func(arg_values);
-    
-    // Free the argument values
-    free(arg_values);
-    
-    return result;
+// Looks up a symbol in an environment.
+symbol_t *lookup_symbol(environment_t *env, const char *identifier) {
+for (int i = env->num_symbols - 1; i >= 0; i--) {
+if (strcmp(env->symbols[i].identifier, identifier) == 0) {
+return &env->symbols[i];
+}
+}
+return NULL;
 }
 
-// Evaluates an expression.
-double evaluate_expression(expression_t *expr, environment_t *env) {
-    switch (expr->type) {
-        case EXPR_NUMBER:
-            return evaluate_number(expr, env);
-        case EXPR_IDENTIFIER:
-            return evaluate_identifier(expr, env);
-        case EXPR_OPERATOR:
-            return evaluate_operator(expr, env);
-        case EXPR_FUNCTION_CALL:
-            return evaluate_function_call(expr, env);
-        default:
-            printf("Unknown expression type: %d\n", expr->type);
-            exit(1);
-    }
+// Adds a symbol to an environment.
+void add_symbol(environment_t *env, const char *identifier, symbol_type_t type, double value) {
+if (env->num_symbols >= MAX_SYMBOLS) {
+printf("Too many symbols.\n");
+exit(1);
+}
+symbol_t *symbol = &env->symbols[env->num_symbols++];
+symbol->identifier = strdup(identifier);
+symbol->type = type;
+symbol->value = value;
 }
 
-// Evaluates an expression and returns the result.
-double evaluate(expression_t *expr, environment_t *env) {
-    return evaluate_expression(expr, env);
+// Adds a function symbol to an environment.
+void add_function(environment_t *env, const char *identifier, int arity, function_t func) {
+if (env->num_symbols >= MAX_SYMBOLS) {
+printf("Too many symbols.\n");
+exit(1);
+}
+symbol_t *symbol = &env->symbols[env->num_symbols++];
+symbol->identifier = strdup(identifier);
+symbol->type = SYMBOL_FUNCTION;
+symbol->arity = arity;
+symbol->func = func;
+}
+
+// Creates a new environment.
+environment_t *create_environment() {
+environment_t env = (environment_t) malloc(sizeof(environment_t));
+env->num_symbols = 0;
+return env;
+}
+
+// Destroys an environment.
+void destroy_environment(environment_t *env) {
+for (int i = 0; i < env->num_symbols; i++) {
+free(env->symbols[i].identifier);
+}
+free(env);
 }
